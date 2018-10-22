@@ -5,9 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "new-component": "node ./scripts/generateVueComponent",
+    "new-module": "node ./scripts/generateVuexModule"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
