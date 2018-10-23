@@ -1,13 +1,31 @@
 <template>
-  <h1>Blockchain</h1>
+  <div>
+    <h1>Blockchain</h1>
+    <button @click="onSubscribe">Subscribe</button>
+    <button @click="onUnsubscribe">Unsubscribe</button>
+    <div class="new-msg">
+      {{ message }}
+    </div>
+  </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
-name: 'Blockchain',
-props: {
-  data: String,
-},
+  name: 'Blockchain',
+
+  props: {
+    data: String,
+  },
+
+  computed: {
+    ...mapGetters('blockchain', ['message']),
+  },
+
+  methods: {
+    ...mapActions('blockchain', ['onSubscribe', 'onUnsubscribe']),
+  },
 };
 </script>
 
