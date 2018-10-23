@@ -1,11 +1,13 @@
-const path = require('path');
+const { resolve } = require('path');
 
 module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src/'),
-        components: path.resolve(__dirname, 'src/components'),
+        '@': resolve(__dirname, 'src'),
+        components: resolve(__dirname, 'src/components'),
+        store: resolve(__dirname, 'src/store'),
+        services: resolve(__dirname, 'src/services'),
       },
     },
   },

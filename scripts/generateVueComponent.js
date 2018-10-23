@@ -61,6 +61,7 @@ props: {
 <style scoped lang="scss">
 </style>
 `;
+
 const indexFileContent = `export { default } from './%NAME%.vue';
 `;
 

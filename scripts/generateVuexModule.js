@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const _ = require('lodash');
 
 const colors = {
   white: '\x1b[37m',
@@ -9,7 +10,7 @@ const colors = {
   default: '\x1b[0m',
 };
 
-const modulesPath = 'src/store/modules';
+const storePath = 'src/store';
 const args = process.argv.slice(2);
 
 const error = (...args) => {
@@ -25,8 +26,19 @@ if (!args.length) {
   return;
 }
 
-const moduleName = args[0];
-const modulePath = path.join(__dirname, '../', modulesPath, moduleName);
+// const moduleName = args[0];
+const moduleName = _.chain(args[0])
+  .camelCase()
+  .upperFirst()
+  .value();
+const modulePath = path.join(
+  __dirname,
+  '../',
+  storePath,
+  'modules',
+  moduleName,
+);
+const typesFile = path.join(__dirname, '../', storePath, 'types.js');
 
 if (fs.existsSync(modulePath)) {
   error(`${moduleName} directory already exists!`);
@@ -46,11 +58,36 @@ export default {
   mutations
 };
 `;
-const exportFileContent = `import * as types from '@/store/types';
+
+const getterContent = `import * as types from '@/store/types';
 
 export default {
 
 };
+`;
+
+const actonsContent = `import * as types from '@/store/types';
+
+export default {
+  async init({ commit }) {
+    commit(types.INIT_%NAME%);
+  },
+};
+`;
+
+const mutationsContent = `import * as types from '@/store/types';
+
+export default {
+  [types.INIT_%NAME%](state) {},
+};
+`;
+
+const typesContent = `/**
+ * Module %MODULE_NAME% types
+ */
+
+export const INIT_%NAME% = 'INIT_%NAME%';
+
 `;
 
 const statePath = `${path.join(modulePath, `${moduleName}.js`)}`;
@@ -60,8 +97,20 @@ const mutationsPath = `${path.join(modulePath, 'mutations.js')}`;
 
 fs.mkdirSync(modulePath);
 fs.appendFileSync(statePath, stateContent);
-fs.appendFileSync(gettersPath, exportFileContent);
-fs.appendFileSync(actionsPath, exportFileContent);
-fs.appendFileSync(mutationsPath, exportFileContent);
+fs.appendFileSync(gettersPath, getterContent);
+fs.appendFileSync(
+  actionsPath,
+  actonsContent.replace(/%NAME%/, moduleName.toUpperCase()),
+);
+fs.appendFileSync(
+  mutationsPath,
+  mutationsContent.replace(/%NAME%/, moduleName.toUpperCase()),
+);
+fs.appendFileSync(
+  typesFile,
+  typesContent
+    .replace(/%MODULE_NAME%/, moduleName)
+    .replace(/%NAME%/g, moduleName.toUpperCase()),
+);
 
 success(colors.green, 'Module', moduleName, 'generated!');
