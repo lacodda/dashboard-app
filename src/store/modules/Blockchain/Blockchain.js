@@ -3,11 +3,10 @@ import actions from './actions';
 import mutations from './mutations';
 
 const state = {
-  socket: {
-    isConnected: false,
-    message: '',
-    reconnectError: false,
-  },
+  isConnected: false,
+  reconnectError: false,
+  transactions: [],
+  sum: 0,
 };
 
 export default {

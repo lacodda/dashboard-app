@@ -10,6 +10,7 @@ export const SAVE = 'SAVE';
  */
 
 export const INIT_BLOCKCHAIN = 'INIT_BLOCKCHAIN';
+export const RESET_BLOCKCHAIN = 'RESET_BLOCKCHAIN';
 export const SOCKET_ONOPEN = 'SOCKET_ONOPEN';
 export const SOCKET_ONCLOSE = 'SOCKET_ONCLOSE';
 export const SOCKET_ONERROR = 'SOCKET_ONERROR';

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import * as types from '@/store/types';
+import * as types from 'store/types';
 
 export default {
   async init({ commit }) {
@@ -12,5 +12,9 @@ export default {
 
   onUnsubscribe() {
     Vue.prototype.$socket.sendObj({ op: 'unconfirmed_unsub' });
+  },
+
+  onReset({ commit }) {
+    commit(types.RESET_BLOCKCHAIN);
   },
 };

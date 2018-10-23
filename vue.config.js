@@ -8,6 +8,7 @@ module.exports = {
         components: resolve(__dirname, 'src/components'),
         store: resolve(__dirname, 'src/store'),
         services: resolve(__dirname, 'src/services'),
+        styles: resolve(__dirname, 'src/scss'),
       },
     },
   },

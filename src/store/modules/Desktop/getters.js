@@ -1,4 +1,4 @@
-import * as types from '@/store/types';
+import * as types from 'store/types';
 
 export default {
 

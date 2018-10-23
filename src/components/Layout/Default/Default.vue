@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="layout-default">
     <app-nav/>
 
     <slot name="header">
     </slot>
 
-    <main class="main">
+    <main class="layout-default__main">
       <slot/>
     </main>
 
@@ -28,4 +28,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.layout-default {
+  &__main {
+    width: 100%;
+    height: 100%;
+  }
+}
 </style>
