@@ -5,7 +5,7 @@
     <button @click="onUnsubscribe" :disabled="!isConnected">Unsubscribe</button>
     <button @click="onReset" :disabled="!isConnected">Reset</button>
     <div class="transactions__wrapper">
-      <div class="transactions__sum">{{ sum }}</div>
+      <div v-if="sum > 0" class="transactions__sum">{{ sum | toBtc }} BTC</div>
       <table v-if="transactions.length > 0" class="table transactions">
         <tr>
           <th>From</th>
@@ -15,7 +15,7 @@
         <tr v-for="(transaction, key) in reverseItems" :key="key" class="transaction__item">
           <td class="transaction__from">{{ transaction.from.join('\n') }}</td>
           <td class="transaction__to">{{ transaction.to.join('\n') }}</td>
-          <td class="transaction__sum">{{ transaction.sum }}</td>
+          <td class="transaction__sum">{{ transaction.sum | toBtc }} BTC</td>
         </tr>
       </table>
       <!-- <div v-if="transactions.length > 0" class="transactions">
@@ -49,6 +49,13 @@ export default {
 
   methods: {
     ...mapActions('blockchain', ['onSubscribe', 'onUnsubscribe', 'onReset']),
+  },
+
+  filters: {
+    toBtc: function(value) {
+      if (!value) return '';
+      return value / 100000000;
+    },
   },
 };
 </script>
