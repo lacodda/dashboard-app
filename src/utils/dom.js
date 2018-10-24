@@ -9,11 +9,7 @@ import isFunction from 'lodash/isFunction';
  * @param {*} baseNode
  * @returns
  */
-export default function matchesSelectorToParentElements(
-  el,
-  selector,
-  baseNode,
-) {
+export function matchesSelectorToParentElements(el, selector, baseNode) {
   let node = el;
 
   const matchesSelectorFunc = [
