@@ -2,7 +2,7 @@ import * as types from 'store/types';
 import Transaction from 'store/models/transaction';
 
 export default {
-  [types.INIT_BLOCKCHAIN](state) {},
+  [types.INIT](state) {},
 
   [types.SOCKET_ONOPEN](state, event) {
     state.isConnected = true;

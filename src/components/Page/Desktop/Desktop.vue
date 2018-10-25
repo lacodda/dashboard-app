@@ -3,6 +3,7 @@
     <h1>Desktop</h1>
     <div style="height: 100%; width: 80%; position: relative; margin: 0 auto;">
       <AppWidgetDraggableResizable v-for="(widget, index) in widgets"
+        v-if="widget.visible"
         :key="index"
         :widget="widget">
         <template slot="header">Header</template>
@@ -15,14 +16,12 @@
 </template>
 
 <script>
-import widgets from '@/data/widgets';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'Desktop',
 
-  data() {
-    return {
-      widgets,
-    };
+  computed: {
+    ...mapGetters('desktop', ['widgets']),
   },
 };
 </script>

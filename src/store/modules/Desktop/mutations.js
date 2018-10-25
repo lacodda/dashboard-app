@@ -1,5 +1,29 @@
 import * as types from 'store/types';
 
+const getWidget = (state, id) => state.widgets.find(widget => widget.id === id);
+
 export default {
-  [types.INIT_DESKTOP](state) {},
+  [types.INIT]() {},
+  [types.SAVE]() {},
+
+  [types.ADD_WIDGET](state, widget) {
+    state.widgets.push(widget);
+  },
+
+  [types.UPDATE_DIMENSIONS](state, { id, width, height }) {
+    const widget = getWidget(state, id);
+    widget.width = width;
+    widget.height = height;
+  },
+
+  [types.UPDATE_POSITION](state, { id, x, y }) {
+    const widget = getWidget(state, id);
+    widget.x = x;
+    widget.y = y;
+  },
+
+  [types.UPDATE_VISIBILITY](state, { id, visibility }) {
+    const widget = getWidget(state, id);
+    widget.visible = visibility;
+  },
 };
