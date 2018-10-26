@@ -20,6 +20,11 @@ export default {
     commit(types.SAVE);
   },
 
+  updateZindex({ commit }, payload) {
+    commit(types.UPDATE_ZINDEX, payload);
+    commit(types.SAVE);
+  },
+
   updateVisibility({ commit }, payload) {
     commit(types.UPDATE_VISIBILITY, payload);
     commit(types.SAVE);

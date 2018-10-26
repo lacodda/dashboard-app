@@ -5,8 +5,8 @@
     :x="widget.x"
     :y="widget.y"
     :z="widget.z"
-    :minw="300"
-    :minh="100"
+    :minw="100"
+    :minh="50"
     :grid="[20,20]"
     :handles="['br']"
     :parent="true"
@@ -17,7 +17,7 @@
     @activated="onActivated">
     <div class="widget__header drag">
       <slot name="header"></slot>
-      <span class="close">&times;</span>
+      <span class="close" @click="onClose">&times;</span>
     </div>
     <div class="widget__content">
       <slot name="content"></slot>
@@ -42,12 +42,9 @@ export default {
     ...mapActions('desktop', [
       'updateDimensions',
       'updatePosition',
+      'updateZindex',
       'updateVisibility',
     ]),
-
-    onActivated() {
-      this.$set(this.widget, 'z', zIndex());
-    },
 
     onResizeStop(left, top, width, height) {
       this.updateDimensions({ ...this.widget, width, height });
@@ -55,6 +52,14 @@ export default {
 
     onDragStop(x, y) {
       this.updatePosition({ ...this.widget, x, y });
+    },
+
+    onActivated() {
+      this.updateZindex({ ...this.widget, z: zIndex() });
+    },
+
+    onClose() {
+      this.updateVisibility({ ...this.widget, visible: false });
     },
   },
 };
@@ -71,6 +76,7 @@ export default {
     width: 100%;
     line-height: 1;
     background: salmon;
+    position: relative;
   }
   &__content {
     text-align: center;
@@ -80,7 +86,15 @@ export default {
   cursor: move;
 }
 .close {
-  float: right;
   cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  right: 0.3rem;
+  transform: translateY(-50%);
+  &:hover {
+    color: aquamarine;
+  }
 }
 </style>

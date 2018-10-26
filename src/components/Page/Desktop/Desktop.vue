@@ -1,6 +1,7 @@
 <template>
   <div style="height: 100vh">
     <h1>Desktop</h1>
+    <AppDropdown :data="hiddenWidgets" @onItemClicked="onItemClicked"/>
     <div style="height: 100%; width: 80%; position: relative; margin: 0 auto;">
       <AppWidgetDraggableResizable v-for="(widget, index) in widgets"
         v-if="widget.visible"
@@ -22,6 +23,20 @@ export default {
 
   computed: {
     ...mapGetters('desktop', ['widgets']),
+
+    hiddenWidgets() {
+      return this.widgets
+        .filter(widget => !widget.visible)
+        .map(({ id, name: label }) => ({ id, label }));
+    },
+  },
+
+  methods: {
+    ...mapActions('desktop', ['updateVisibility']),
+
+    onItemClicked({ id }) {
+      this.updateVisibility({ id, visible: true });
+    },
   },
 };
 </script>

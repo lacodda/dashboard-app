@@ -22,8 +22,13 @@ export default {
     widget.y = y;
   },
 
-  [types.UPDATE_VISIBILITY](state, { id, visibility }) {
+  [types.UPDATE_ZINDEX](state, { id, z }) {
     const widget = getWidget(state, id);
-    widget.visible = visibility;
+    widget.z = z;
+  },
+
+  [types.UPDATE_VISIBILITY](state, { id, visible }) {
+    const widget = getWidget(state, id);
+    widget.visible = visible;
   },
 };

@@ -12,14 +12,15 @@ export default (
       row++;
       col = 0;
     }
-    yield { row: row - 1, col };
+    yield { row: row - 1, col, name: start };
     col++;
     if (start === end) return;
     yield* range(start + 1, end, row, col);
   }
 
-  return [...range(1, totalNum)].map(({ row, col }) => ({
+  return [...range(1, totalNum)].map(({ row, col, name }) => ({
     id: uuid(),
+    name,
     width,
     height,
     x: width * col + indent * col,
