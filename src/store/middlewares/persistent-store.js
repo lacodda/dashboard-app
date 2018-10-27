@@ -12,7 +12,9 @@ export default () => {
       switch (type) {
         case `desktop/${types.INIT}`:
           try {
-            const widgets = (await persistentStore.getState('widgets')) || generateWidgets(5);
+            const widgets =
+              (await persistentStore.getState('widgets')) ||
+              generateWidgets('Tile', 5);
 
             if (widgets.length > 0) {
               widgets.forEach(widget => {

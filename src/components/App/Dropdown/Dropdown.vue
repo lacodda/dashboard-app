@@ -1,30 +1,20 @@
 <template>
-  <div class="dropdown">
-    <a class="btn btn--flat btn--flex" @click="autoShow">
-      <span>{{ selectedText }}</span>
-      <!-- <svg-icon name="angle-down" size="14" class="dropdown__toggle"/> -->
-    </a>
+  <div class="dropdown" :class="{'dropdown--active': isShow}">
+    <button class="btn btn--default dropdown__toggle"
+      :disabled="items.length == 0"
+      @click="autoShow">
+      {{ selectedText }}
+    </button>
     <transition name="custom-classes-transition"
                 enter-active-class="animation__fade-in"
                 leave-active-class="animation__fade-out">
-      <div class="dropdown__menu" v-if="isShow" :style="dropdownMenuStyle">
-        <div v-if="arrow" class="dropdown__arrow"></div>
-        <div class="dropdown__item"
-             v-if="!grouped"
-             v-for="item in items"
-             :data-title="item.label"
-             @click="!multiple && itemClicked(item)"
-             :class="{selected: item.selected}">
-          <span>{{ appendIdx(item) }}</span>
-          {{ appendIdx(item) }}
-          <div v-if="multiple">
-            <input type="checkbox" :disabled="item.disabled" :checked="item.selected" @change="checkboxChanged(item)"
-                   :id="id(item)">
-            <label :for="id(item)" @click="itemClicked(item)">{{ item.label }}</label>
-          </div>
-          <div v-else>
-            {{ item.label }}
-          </div>
+      <div class="dropdown__menu" v-if="isShow && items.length > 0" :style="dropdownMenuStyle">
+        <div v-for="item in items"
+          :data-title="item.label"
+          :class="{selected: item.selected}"
+          class="dropdown__item"
+          @click="!multiple && itemClicked(item)">
+          {{ item.label }}
         </div>
       </div>
     </transition>

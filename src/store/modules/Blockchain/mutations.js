@@ -1,8 +1,9 @@
+import Vue from 'vue';
 import * as types from 'store/types';
 import Transaction from 'store/models/transaction';
 
 export default {
-  [types.INIT](state) {},
+  [types.INIT]() {},
 
   [types.SOCKET_ONOPEN](state, event) {
     state.isConnected = true;
@@ -32,6 +33,16 @@ export default {
 
   [types.SOCKET_RECONNECT_ERROR](state) {
     state.reconnectError = true;
+  },
+
+  [types.SUBSCRIBE_BLOCKCHAIN](state) {
+    Vue.prototype.$socket.sendObj({ op: 'unconfirmed_sub' });
+    state.isSubscribed = true;
+  },
+
+  [types.UNSUBSCRIBE_BLOCKCHAIN](state) {
+    Vue.prototype.$socket.sendObj({ op: 'unconfirmed_unsub' });
+    state.isSubscribed = false;
   },
 
   [types.RESET_BLOCKCHAIN](state) {

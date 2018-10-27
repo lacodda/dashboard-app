@@ -1,37 +1,21 @@
 <template>
   <div class="layout-default">
-    <app-nav/>
-
-    <slot name="header">
-    </slot>
-
-    <main class="layout-default__main">
+    <header class="layout-default__header">
+      <AppNavbar/>
+    </header>
+    <main class="layout-default__content">
       <slot/>
     </main>
-
-    <slot name="footer">
-    </slot>
-  
+    <footer class="layout-default__footer">
+    </footer>
   </div>
 </template>
 
 <script>
 export default {
   name: 'LayoutDefault',
-
-  data() {
-    return {};
-  },
-
-  methods: {},
 };
 </script>
 
 <style lang="scss" scoped>
-.layout-default {
-  &__main {
-    width: 100%;
-    height: 100%;
-  }
-}
 </style>

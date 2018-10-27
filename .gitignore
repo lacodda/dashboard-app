@@ -16,6 +16,7 @@ jsconfig.json
 *.ntvs*
 *.njsproj
 *.sln
+*.sw*
 
 # Temporary
 tmp/
@@ -32,6 +33,7 @@ logs/
 *.log
 npm-debug.log*
 yarn-error.log*
+yarn-debug.log*
 
 # Typings
 typings/
@@ -61,3 +63,7 @@ lib-cov/
 
 # SSL
 ssl/
+
+# local env files
+.env.local
+.env.*.local

@@ -1,8 +1,9 @@
 <template>
-  <nav>
-    <ul class="menu">
-      <li class="nav-item" v-for="(route, key) in routes" :key="key">
-        <router-link class="nav-link" exact-active-class="is-active"
+  <nav class="navbar">
+    <span class="navbar__logo">Dashboard App</span>
+    <ul class="navbar__menu">
+      <li class="navbar__menu-item" v-for="(route, key) in routes" :key="key">
+        <router-link class="navbar__menu-link btn" exact-active-class="btn--active"
           :to="route"
           :data-text="route.title">
           {{ route.title }}
@@ -14,7 +15,7 @@
 
 <script>
 export default {
-  name: 'Nav',
+  name: 'AppNavbar',
 
   computed: {
     routes() {

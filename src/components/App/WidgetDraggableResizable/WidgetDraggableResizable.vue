@@ -16,7 +16,7 @@
     @resizestop="onResizeStop"
     @activated="onActivated">
     <div class="widget__header drag">
-      <slot name="header"></slot>
+      <slot name="header">{{ widget.name }}</slot>
       <span class="close" @click="onClose">&times;</span>
     </div>
     <div class="widget__content">
@@ -64,37 +64,6 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" scoped>
-.widget {
-  &__container {
-    background-color: aquamarine;
-    border: 1px solid salmon;
-    user-select: none;
-  }
-  &__header {
-    padding: 0.5rem;
-    width: 100%;
-    line-height: 1;
-    background: salmon;
-    position: relative;
-  }
-  &__content {
-    text-align: center;
-  }
-}
-.drag {
-  cursor: move;
-}
-.close {
-  cursor: pointer;
-  font-size: 1.5rem;
-  line-height: 1;
-  position: absolute;
-  top: 50%;
-  right: 0.3rem;
-  transform: translateY(-50%);
-  &:hover {
-    color: aquamarine;
-  }
-}
 </style>

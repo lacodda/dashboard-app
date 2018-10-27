@@ -4,6 +4,7 @@ import mutations from './mutations';
 
 const state = {
   isConnected: false,
+  isSubscribed: false,
   reconnectError: false,
   transactions: [],
   sum: 0,

@@ -1,6 +1,7 @@
 import { uuid } from './helpers';
 
 export default (
+  name,
   totalNum,
   inRowNum = 3,
   width = 300,
@@ -12,7 +13,7 @@ export default (
       row++;
       col = 0;
     }
-    yield { row: row - 1, col, name: start };
+    yield { row: row - 1, col, name: `${name} #${start}` };
     col++;
     if (start === end) return;
     yield* range(start + 1, end, row, col);

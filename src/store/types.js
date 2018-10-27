@@ -9,7 +9,10 @@ export const SAVE = 'SAVE';
  * Module Blockchain types
  */
 
+export const SUBSCRIBE_BLOCKCHAIN = 'SUBSCRIBE_BLOCKCHAIN';
+export const UNSUBSCRIBE_BLOCKCHAIN = 'UNSUBSCRIBE_BLOCKCHAIN';
 export const RESET_BLOCKCHAIN = 'RESET_BLOCKCHAIN';
+
 export const SOCKET_ONOPEN = 'SOCKET_ONOPEN';
 export const SOCKET_ONCLOSE = 'SOCKET_ONCLOSE';
 export const SOCKET_ONERROR = 'SOCKET_ONERROR';

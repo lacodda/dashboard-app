@@ -1,4 +1,4 @@
-# dashboard-app
+# Dashboard App
 
 ## Project setup
 ```
@@ -24,3 +24,6 @@ npm run test
 ```
 npm run lint
 ```
+
+## License
+[MIT](LICENSE.md)

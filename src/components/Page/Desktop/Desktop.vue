@@ -1,17 +1,22 @@
 <template>
-  <div style="height: 100vh">
-    <h1>Desktop</h1>
-    <AppDropdown :data="hiddenWidgets" @onItemClicked="onItemClicked"/>
-    <div style="height: 100%; width: 80%; position: relative; margin: 0 auto;">
-      <AppWidgetDraggableResizable v-for="(widget, index) in widgets"
-        v-if="widget.visible"
-        :key="index"
-        :widget="widget">
-        <template slot="header">Header</template>
-        <template slot="content">
-          <h2>{{index+1}}</h2>
-        </template>
-      </AppWidgetDraggableResizable>
+  <div class="desktop">
+    <h1 class="page__header">Desktop</h1>
+    <div class="desktop__control">
+      <AppDropdown class="desktop__restore"
+        :data="hiddenWidgets" 
+        :placeholder="'Восстановить удаленные окна'" 
+        @onItemClicked="onItemClicked"/>
+    </div>
+    <div class="desktop__board-wrapper">
+      <div class="desktop__board">
+        <AppWidgetDraggableResizable v-for="(widget, index) in widgets"
+          v-if="widget.visible"
+          :key="index"
+          :widget="widget">
+          <template slot="header"></template>
+          <template slot="content"></template>
+        </AppWidgetDraggableResizable>
+      </div>
     </div>
   </div>
 </template>

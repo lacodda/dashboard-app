@@ -48,3 +48,11 @@ h6,
 .h6 {
   font-size: $h6-font-size;
 }
+
+.page {
+  &__header {
+    text-align: center;
+    margin: 5rem 0;
+    font-size: 5rem;
+  }
+}

@@ -1,30 +1,28 @@
 <template>
-  <div>
-    <h1>Blockchain</h1>
-    <button @click="onSubscribe" :disabled="!isConnected">Subscribe</button>
-    <button @click="onUnsubscribe" :disabled="!isConnected">Unsubscribe</button>
-    <button @click="onReset" :disabled="!isConnected">Reset</button>
-    <div class="transactions__wrapper">
-      <div v-if="sum > 0" class="transactions__sum">{{ sum | toBtc }} BTC</div>
+  <div class="blockchain">
+    <h1 class="page__header">Blockchain</h1>
+    <div class="blockchain__control">
+      <button @click="subscribe" :disabled="!isConnected || isSubscribed" class="btn btn--green">Запуск</button>
+      <button @click="unsubscribe" :disabled="!isConnected || !isSubscribed" class="btn btn--red">Остановка</button>
+      <button @click="reset" :disabled="!isConnected || transactions.length == 0" class="btn btn--orange">Сброс</button>
+    </div>
+    <div v-if="!isConnected" class="blockchain__loading">
+      ...Соединение с API Blockchain
+    </div>
+    <div class="blockchain__transactions">
+      <div v-if="sum > 0" class="blockchain__sum">Сумма: {{ sum | toBtc }} BTC</div>
       <table v-if="transactions.length > 0" class="table transactions">
         <tr>
           <th>From</th>
           <th>To</th>
           <th>Sum</th>
         </tr>
-        <tr v-for="(transaction, key) in reverseItems" :key="key" class="transaction__item">
+        <tr v-for="(transaction, key) in reverseItems" :key="key" class="blockchain__transaction">
           <td class="transaction__from">{{ transaction.from.join('\n') }}</td>
           <td class="transaction__to">{{ transaction.to.join('\n') }}</td>
           <td class="transaction__sum">{{ transaction.sum | toBtc }} BTC</td>
         </tr>
       </table>
-      <!-- <div v-if="transactions.length > 0" class="transactions">
-        <div v-for="(transaction, key) in transactions" :key="key" class="transaction__item">
-          <div class="transaction__from">{{ transaction.from.join(`\n`) }}</div>
-          <div class="transaction__to">{{ transaction.to.join("\n") }}</div>
-          <div class="transaction__sum">{{ transaction.sum }}</div>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
@@ -40,7 +38,12 @@ export default {
   },
 
   computed: {
-    ...mapGetters('blockchain', ['isConnected', 'transactions', 'sum']),
+    ...mapGetters('blockchain', [
+      'isConnected',
+      'isSubscribed',
+      'transactions',
+      'sum',
+    ]),
 
     reverseItems() {
       return this.transactions.slice().reverse();
@@ -48,7 +51,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('blockchain', ['onSubscribe', 'onUnsubscribe', 'onReset']),
+    ...mapActions('blockchain', ['subscribe', 'unsubscribe', 'reset']),
   },
 
   filters: {
@@ -62,21 +65,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.transactions {
-}
-.transaction {
-  &__item {
-    > * {
-    }
-  }
-  &__from {
-    width: 40%;
-  }
-  &__to {
-    width: 40%;
-  }
-  &__sum {
-    width: auto;
-  }
-}
 </style>
