@@ -42,7 +42,8 @@ npm run lint
 - [localforage](https://github.com/localForage/localForage)
 - [lodash](https://lodash.com/)
 - [express](http://expressjs.com/)
-- [serve-static](https://github.com/expressjs/serve-static#readme)
+- [serve-static](https://github.com/expressjs/serve-static)
+- [VueDraggableResizable](https://github.com/mauricius/vue-draggable-resizable) is also used with minor modifications.
 
 ## License
 [MIT](LICENSE.md)
