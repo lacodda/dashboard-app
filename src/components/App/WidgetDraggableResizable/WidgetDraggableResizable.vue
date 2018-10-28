@@ -7,7 +7,7 @@
     :z="widget.z"
     :minw="100"
     :minh="50"
-    :grid="[20,20]"
+    :grid="[10,10]"
     :handles="['br']"
     :parent="true"
     :selectable="true"
@@ -27,6 +27,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import desktop from 'store/data/desktop';
+import widget from 'store/data/widget';
 import { zIndex } from '@/utils/helpers';
 
 export default {
@@ -44,6 +46,7 @@ export default {
       'updatePosition',
       'updateZindex',
       'updateVisibility',
+      'resetDefaults',
     ]),
 
     onResizeStop(left, top, width, height) {
@@ -59,7 +62,10 @@ export default {
     },
 
     onClose() {
+      const { defaultX: x, defaultY: y } = desktop;
+      const { width, height } = widget;
       this.updateVisibility({ ...this.widget, visible: false });
+      this.resetDefaults({ ...this.widget, width, height, x, y });
     },
   },
 };

@@ -1,19 +1,25 @@
 import { uuid } from './helpers';
 
-export default (
-  name,
-  totalNum,
-  inRowNum = 3,
-  width = 300,
-  height = 100,
-  indent = 20,
-) => {
+/**
+ * Function to generate an array of widgets
+ *
+ * @param {Object} {
+ *   totalNum,
+ *   inRowNum,
+ *   width,
+ *   height,
+ *   indent,
+ *   getName,
+ * }
+ * @returns {Array}
+ */
+export default ({ totalNum, inRowNum, width, height, indent, getName }) => {
   function* range(start, end, row = 0, col = 0) {
     if ((start - 1) % inRowNum === 0) {
       row++;
       col = 0;
     }
-    yield { row: row - 1, col, name: `${name} #${start}` };
+    yield { row: row - 1, col, name: getName(start) };
     col++;
     if (start === end) return;
     yield* range(start + 1, end, row, col);

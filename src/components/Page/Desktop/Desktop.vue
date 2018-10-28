@@ -23,6 +23,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { zIndex } from '@/utils/helpers';
+
 export default {
   name: 'Desktop',
 
@@ -37,10 +39,11 @@ export default {
   },
 
   methods: {
-    ...mapActions('desktop', ['updateVisibility']),
+    ...mapActions('desktop', ['updateVisibility', 'updateZindex']),
 
     onItemClicked({ id }) {
       this.updateVisibility({ id, visible: true });
+      this.updateZindex({ id, z: zIndex() });
     },
   },
 };

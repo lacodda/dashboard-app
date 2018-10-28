@@ -29,4 +29,9 @@ export default {
     commit(types.UPDATE_VISIBILITY, payload);
     commit(types.SAVE);
   },
+
+  resetDefaults({ commit }, payload) {
+    commit(types.RESET_DEFAULTS, payload);
+    commit(types.SAVE);
+  },
 };

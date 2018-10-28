@@ -1,4 +1,6 @@
 import * as types from 'store/types';
+import desktop from 'store/data/desktop';
+import widget from 'store/data/widget';
 import PersistentStore from 'services/persistent-store.service';
 import generateWidgets from '@/utils/generateWidgets';
 
@@ -14,7 +16,7 @@ export default () => {
           try {
             const widgets =
               (await persistentStore.getState('widgets')) ||
-              generateWidgets('Tile', 5);
+              generateWidgets({ ...desktop, ...widget });
 
             if (widgets.length > 0) {
               widgets.forEach(widget => {

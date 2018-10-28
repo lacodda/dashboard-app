@@ -31,4 +31,12 @@ export default {
     const widget = getWidget(state, id);
     widget.visible = visible;
   },
+
+  [types.RESET_DEFAULTS](state, { id, width, height, x, y }) {
+    const widget = getWidget(state, id);
+    widget.width = width;
+    widget.height = height;
+    widget.x = x;
+    widget.y = y;
+  },
 };

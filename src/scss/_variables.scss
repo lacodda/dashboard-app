@@ -166,7 +166,7 @@ $modal-transition: transform 0.3s ease-out !default;
 // Dropdowns
 //------------------------------------------------------------------------------------
 $dropdown-font-size: 1.4rem !default;
-$dropdown-min-width: calc(100% + 0.1rem) !default;
+$dropdown-min-width: calc(100% - 0.1rem) !default;
 $dropdown-padding-y: 0 !default;
 $dropdown-spacer: -0.1rem !default;
 $dropdown-bg: $white !default;
